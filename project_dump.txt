@@ -1,0 +1,1733 @@
+PROJECT STRUCTURE:
+==================
+Fruite_Ninja_Using_OpenCV/
+├── .gitignore
+├── README.md
+├── assets
+│   ├── audio
+│   │   ├── 34. Music Menu.mp3
+│   │   ├── 36. U I Game Over.mp3
+│   │   ├── 37. U I Game Start.mp3
+│   │   ├── Asian Rising Combo Hit 01 Sound Effect 066793498 Nw Prev.wav
+│   │   ├── Asian Rising Combo Hit 02 Sound Effect 066793499 Nw Prev.wav
+│   │   ├── Asian Rising Combo Hit 04 Sound Effect 066793500 Nw Prev.wav
+│   │   ├── Asian Rising Combo Hit 05 Sound Effect 066793497 Nw Prev.wav
+│   │   ├── Asian Rising Combo Hit 06 Sound Effect 066793501 Nw Prev.wav
+│   │   ├── Fruit Splat Score 01 Sound Effect 056561276 Nw Prev.wav
+│   │   ├── Fruit Splat Score 02 Sound Effect 056561283 Nw Prev.wav
+│   │   ├── Fruit Splat Score 03 Sound Effect 056561285 Nw Prev.wav
+│   │   ├── Fruit Splat Score 04 Sound Effect 056561282 Nw Prev.wav
+│   │   ├── Fruit Splat Score 05 Sound Effect 056561279 Nw Prev.wav
+│   │   ├── Game Fruit Splat 01 Sound Effect 057386742 Nw Prev.wav
+│   │   ├── Game Fruit Splat 02 Sound Effect 057386751 Nw Prev.wav
+│   │   ├── Game Fruit Splat 03 Sound Effect 057386749 Nw Prev.wav
+│   │   ├── Game Fruit Splat 04 Sound Effect 057386741 Nw Prev.wav
+│   │   ├── Game Fruit Splat 05 Sound Effect 057386756 Nw Prev.wav
+│   │   ├── bomb explosion sound.wav
+│   │   ├── game sound fast.mp3
+│   │   ├── game sound slow.mp3
+│   │   └── starting screen.mp3
+│   ├── background
+│   │   ├── Game_Playing_image.jpg
+│   │   └── game_background.jpg
+│   ├── bg
+│   │   └── background.png
+│   ├── fruits
+│   │   ├── apple.png
+│   │   ├── apple_half_1.png
+│   │   ├── apple_half_1_small.png
+│   │   ├── apple_half_2.png
+│   │   ├── apple_half_2_small.png
+│   │   ├── apple_small.png
+│   │   ├── banana.png
+│   │   ├── banana_half_1.png
+│   │   ├── banana_half_1_small.png
+│   │   ├── banana_half_2.png
+│   │   ├── banana_half_2_small.png
+│   │   ├── banana_small.png
+│   │   ├── bomb.png
+│   │   ├── bomb_small.png
+│   │   ├── coconut.png
+│   │   ├── coconut_half_1.png
+│   │   ├── coconut_half_1_small.png
+│   │   ├── coconut_half_2.png
+│   │   ├── coconut_half_2_small.png
+│   │   ├── coconut_small.png
+│   │   ├── orange.png
+│   │   ├── orange_half_1.png
+│   │   ├── orange_half_1_small.png
+│   │   ├── orange_half_2.png
+│   │   ├── orange_half_2_small.png
+│   │   ├── orange_small.png
+│   │   ├── pineapple.png
+│   │   ├── pineapple_half_1.png
+│   │   ├── pineapple_half_1_small.png
+│   │   ├── pineapple_half_2.png
+│   │   ├── pineapple_half_2_small.png
+│   │   ├── pineapple_small.png
+│   │   ├── watermelon.png
+│   │   ├── watermelon_half_1.png
+│   │   ├── watermelon_half_1_small.png
+│   │   ├── watermelon_half_2.png
+│   │   ├── watermelon_half_2_small.png
+│   │   └── watermelon_small.png
+│   ├── ui
+│   │   └── buttons
+│   │       ├── btn_about.png
+│   │       ├── btn_buy.png
+│   │       ├── btn_download_icon.png
+│   │       ├── btn_grid_icon.png
+│   │       ├── btn_help.png
+│   │       ├── btn_home.png
+│   │       ├── btn_home_icon.png
+│   │       ├── btn_info_icon.png
+│   │       ├── btn_levels.png
+│   │       ├── btn_options.png
+│   │       ├── btn_pause_icon.png
+│   │       ├── btn_play.png
+│   │       ├── btn_play_icon.png
+│   │       ├── btn_replay.png
+│   │       ├── btn_restart_icon.png
+│   │       ├── btn_resume.png
+│   │       ├── btn_settings_icon.png
+│   │       ├── btn_share_icon.png
+│   │       ├── btn_shop.png
+│   │       └── btn_star_icon.png
+│   └── vfx
+│       ├── explosion.png
+│       ├── explosion_small.png
+│       ├── splash_orange.png
+│       ├── splash_orange_small.png
+│       ├── splash_red.png
+│       ├── splash_red_small.png
+│       ├── splash_transparent.png
+│       ├── splash_transparent_small.png
+│       ├── splash_yellow.png
+│       └── splash_yellow_small.png
+├── audio_manager.py
+├── convert_audio.py
+├── export.py
+├── game_engine.py
+├── game_objects.py
+├── hand_tracker.py
+├── input_manager.py
+├── main.py
+├── physics.py
+├── requirements.txt
+├── sensors.py
+└── ui_manager.py
+
+
+FILE CONTENTS:
+==============
+
+
+--- README.md ---
+
+# Fruit Ninja - AI Hand Controlled
+
+A high-performance computer vision game where you play Fruit Ninja using your real hand as the blade! Built with Python, OpenCV, MediaPipe, and Pygame.
+
+## Features
+
+*   **Real-Time Hand Tracking**: Uses MediaPipe to track your index finger with low latency.
+*   **Physics-Based Gaming**: Fruits launch and fall with gravity; blade collision uses robust line-segment detection for fast swipes.
+*   **Visual Adjustments**: 
+    *   **Blade Trail**: Dynamic cyan trail that follows your finger.
+    *   **Slicing Effects**: Fruits split into two halves when sliced.
+    *   **Assets**: Uses real fruit graphics (Apple, Banana, Watermelon, etc.).
+*   **Gameplay Mechanics**:
+    *   **Bombs**: Avoid slicing the dark bombs with red fuses! (-5 points).
+    *   **Palm Pause**: Show an **Open Palm** to the camera to Pause/Shield the blade (safety mechanism).
+    *   **Score System**: Track your slicing performance.
+
+## Prerequisites
+
+*   Python 3.7+
+*   Webcam
+
+## Installation
+
+1.  Clone the repository (or download files).
+2.  Install dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+## How to Play
+
+1.  Run the game:
+    ```bash
+    python main.py
+    ```
+2.  **Controls**:
+    *   **Slice**: Move your index finger across the screen to slice fruits. You must move fast enough to create a "cut".
+    *   **Pause**: Open your hand (extend all 5 fingers) to pause the blade. This is useful if a bomb is in the way and you want to move your hand safely.
+    *   **Quit**: Close the window or press `Alt+F4`.
+
+## Troubleshooting
+
+*   **Lag?** ensure you have good lighting for the camera.
+*   **Camera Error?** The code uses `cv2.CAP_DSHOW` for Windows compatibility. If on Linux/Mac, you might need to remove that flag in `sensors.py`.
+
+## Credits
+
+Built with:
+*   [MediaPipe](https://developers.google.com/mediapipe)
+*   [Pygame](https://www.pygame.org/)
+*   [OpenCV](https://opencv.org/)
+
+
+
+--- audio_manager.py ---
+
+import pygame
+import os
+import random
+
+class AudioManager:
+    def __init__(self, asset_dir="assets/audio"):
+        self.asset_dir = asset_dir
+        self.sounds = {
+            "splat": [],
+            "combo": [],
+            "menu_music": None,
+            "game_start": None,
+            "game_over": None,
+            "bomb": None,
+            "game_loop_slow": None,
+            "game_loop_fast": None
+        }
+        self.init_mixer()
+        self.load_assets()
+        
+    def init_mixer(self):
+        if not pygame.mixer.get_init():
+            pygame.mixer.init(frequency=44100, size=-16, channels=2, buffer=512)
+        pygame.mixer.set_num_channels(32) # Allow many sounds at once
+        
+    def load_assets(self):
+        if not os.path.exists(self.asset_dir):
+            print(f"Warning: Audio dir {self.asset_dir} not found.")
+            return
+
+        for filename in os.listdir(self.asset_dir):
+            path = os.path.join(self.asset_dir, filename)
+            lower_name = filename.lower()
+            
+            try:
+                # Load based on keywords
+                if "music menu" in lower_name:
+                    self.sounds["menu_music"] = path
+                elif "game start" in lower_name: # 37. U I Game Start
+                    self.sounds["game_start"] = pygame.mixer.Sound(path)
+                elif "game over" in lower_name: # 36. U I Game Over
+                    self.sounds["game_over"] = pygame.mixer.Sound(path)
+                elif "bomb" in lower_name:
+                    self.sounds["bomb"] = pygame.mixer.Sound(path)
+                elif "game sound slow" in lower_name:
+                    self.sounds["game_loop_slow"] = path
+                elif "game sound fast" in lower_name:
+                    self.sounds["game_loop_fast"] = path
+                elif "splat" in lower_name:
+                    self.sounds["splat"].append(pygame.mixer.Sound(path))
+                elif "combo" in lower_name:
+                    self.sounds["combo"].append(pygame.mixer.Sound(path))
+            except Exception as e:
+                print(f"Failed to load audio {filename}: {e}")
+
+    def play_music(self, bg_type="menu"):
+        """Plays background music looping."""
+        try:
+            path = None
+            if bg_type == "menu":
+                path = self.sounds["menu_music"]
+            elif bg_type == "game_slow":
+                path = self.sounds["game_loop_slow"]
+            elif bg_type == "game_fast":
+                path = self.sounds["game_loop_fast"]
+                
+            if path:
+                pygame.mixer.music.load(path)
+                pygame.mixer.music.play(-1) # Loop
+                pygame.mixer.music.set_volume(0.5)
+        except Exception as e:
+            print(f"Music Error: {e}")
+
+    def stop_music(self):
+        pygame.mixer.music.stop()
+
+    def play_sfx(self, sound_type):
+        """Plays a one-shot sound effect."""
+        try:
+            sound = None
+            if sound_type == "splat" and self.sounds["splat"]:
+                sound = random.choice(self.sounds["splat"])
+                sound.set_volume(0.6)
+            elif sound_type == "combo" and self.sounds["combo"]:
+                sound = random.choice(self.sounds["combo"])
+                sound.set_volume(1.0)
+            elif sound_type == "bomb":
+                sound = self.sounds["bomb"]
+                sound.set_volume(1.0)
+            elif sound_type == "start":
+                sound = self.sounds["game_start"]
+            elif sound_type == "over":
+                sound = self.sounds["game_over"]
+            
+            if sound:
+                sound.play()
+        except Exception as e:
+            # print(f"SFX Error: {e}") 
+            pass
+
+
+--- convert_audio.py ---
+
+import os
+from moviepy import AudioFileClip
+
+def convert_audio():
+    audio_dir = "assets/audio"
+    if not os.path.exists(audio_dir):
+        print("Audio directory not found.")
+        return
+
+    print("Scanning for .m4a files to convert...")
+    
+    for filename in os.listdir(audio_dir):
+        if filename.lower().endswith(".m4a"):
+            m4a_path = os.path.join(audio_dir, filename)
+            wav_path = os.path.join(audio_dir, filename.rsplit(".", 1)[0] + ".wav")
+            
+            print(f"Converting: {filename} -> {os.path.basename(wav_path)}")
+            
+            try:
+                clip = AudioFileClip(m4a_path)
+                clip.write_audiofile(wav_path, logger=None)
+                clip.close()
+                
+                # Verify passed
+                if os.path.exists(wav_path):
+                    print(f"Success. Removing original {filename}")
+                    os.remove(m4a_path)
+                else:
+                    print(f"Error: wav file not created for {filename}")
+                    
+            except Exception as e:
+                print(f"Failed to convert {filename}: {e}")
+
+if __name__ == "__main__":
+    convert_audio()
+
+
+--- export.py ---
+
+import os
+
+# Define what to ignore and what to include
+IGNORE_DIRS = {'.venv', '__pycache__', '.git', '.idea', 'node_modules'}
+ALLOWED_EXTENSIONS = {'.py', '.txt', '.md', '.json'}
+OUTPUT_FILENAME = "project_dump.txt"
+
+def generate_tree(dir_path, prefix=""):
+    """Recursively generates a tree structure of the directory."""
+    tree_str = ""
+    try:
+        items = sorted(os.listdir(dir_path))
+    except PermissionError:
+        return ""
+        
+    # Filter out ignored directories and the output file itself
+    items = [item for item in items if item not in IGNORE_DIRS and item != OUTPUT_FILENAME]
+
+    for i, item in enumerate(items):
+        path = os.path.join(dir_path, item)
+        is_last = (i == len(items) - 1)
+        connector = "└── " if is_last else "├── "
+        tree_str += f"{prefix}{connector}{item}\n"
+
+        if os.path.isdir(path):
+            extension = "    " if is_last else "│   "
+            tree_str += generate_tree(path, prefix + extension)
+            
+    return tree_str
+
+def export_project(root_dir):
+    with open(OUTPUT_FILENAME, 'w', encoding='utf-8') as out_file:
+        # 1. Write the Project Tree
+        out_file.write("PROJECT STRUCTURE:\n")
+        out_file.write("==================\n")
+        out_file.write(f"{os.path.basename(os.path.abspath(root_dir))}/\n")
+        out_file.write(generate_tree(root_dir))
+        out_file.write("\n\n")
+        
+        # 2. Write the File Contents
+        out_file.write("FILE CONTENTS:\n")
+        out_file.write("==============\n")
+
+        for root, dirs, files in os.walk(root_dir):
+            # Modify dirs in-place to skip ignored directories
+            dirs[:] = [d for d in dirs if d not in IGNORE_DIRS]
+
+            for file in sorted(files):
+                if file == OUTPUT_FILENAME or file == "export_project.py":
+                    continue  # Don't export the dump file or the script itself
+                    
+                if any(file.endswith(ext) for ext in ALLOWED_EXTENSIONS):
+                    file_path = os.path.join(root, file)
+                    rel_path = os.path.relpath(file_path, root_dir)
+
+                    out_file.write(f"\n\n--- {rel_path} ---\n\n")
+                    try:
+                        with open(file_path, 'r', encoding='utf-8') as in_file:
+                            out_file.write(in_file.read())
+                    except Exception as e:
+                        out_file.write(f"[Error reading file: {e}]\n")
+
+if __name__ == "__main__":
+    export_project(".")
+    print(f"✅ Project successfully exported to {OUTPUT_FILENAME}")
+
+--- game_engine.py ---
+
+class GameMode:
+    def __init__(self):
+        self.score = 0
+        self.lives = 0
+        self.game_over = False
+        self.name = "Base"
+        
+    def on_slice(self, fruit_obj):
+        self.score += 1
+        return 1 # Points
+        
+    def on_bomb(self):
+        pass
+        
+    def on_miss(self):
+        pass
+        
+    def get_status(self):
+        return f"Score: {self.score}  Lives: {self.lives}"
+
+class ClassicMode(GameMode):
+    def __init__(self):
+        super().__init__()
+        self.lives = 3
+        self.name = "Classic"
+        
+    def on_slice(self, fruit_obj):
+        # Bonus for criticals? Simple +1 for now
+        self.score += 1
+        return 1
+        
+    def on_bomb(self):
+        # Classic: Bomb = -1 Life (or Game Over in arcade, but user said -1 life)
+        # Re-reading prompt: "Classic Mode: ... Bombs reduce lives"
+        self.lives -= 1
+        if self.lives <= 0:
+            self.game_over = True
+            
+    def on_miss(self):
+        # Missed fruit = -1 life
+        self.lives -= 1
+        if self.lives <= 0:
+            self.game_over = True
+
+class SurvivalMode(GameMode):
+    def __init__(self):
+        super().__init__()
+        self.lives = 1
+        self.name = "Survival"
+        
+    def on_slice(self, fruit_obj):
+        self.score += 1
+        return 1
+        
+    def on_bomb(self):
+        # Instant death
+        self.lives = 0
+        self.game_over = True
+        
+    def on_miss(self):
+        # Instant death
+        self.lives = 0
+        self.game_over = True
+
+
+--- game_objects.py ---
+
+import pygame
+import random
+import time
+from collections import deque
+import physics
+
+# Basic Colors
+RED = (255, 50, 50)
+GREEN = (50, 255, 50)
+WHITE = (255, 255, 255)
+ORANGE = (255, 165, 0)
+
+class Blade:
+    def __init__(self):
+        # Stores (x, y, timestamp)
+        self.points = deque(maxlen=20) 
+        self.color = (0, 255, 255) # Cyan for high contrast
+        self.min_width = 5
+        self.max_width = 25
+        self.fade_speed = 5 # How fast trail fades
+
+    def update(self, x, y):
+        current_time = time.time()
+        self.points.append((x, y, current_time))
+        
+        # Remove old points (older than 0.2s) to keep trail short & responsive
+        while self.points:
+            if current_time - self.points[0][2] > 0.15:
+                self.points.popleft()
+            else:
+                break
+                
+    def draw(self, screen):
+        if len(self.points) < 2:
+            return
+            
+        # Draw connected lines with varying thickness
+        # Newest points = thickest
+        points_list = list(self.points)
+        for i in range(len(points_list) - 1):
+            p1 = points_list[i]
+            p2 = points_list[i+1]
+            
+            # Ratio: 0 (oldest) to 1 (newest)
+            ratio = i / len(points_list)
+            width = int(self.min_width + (self.max_width - self.min_width) * ratio)
+            
+            # Draw line segment
+            # Note: Pygame lines with width > 1 have gaps at corners. 
+            # Ideally draw circles at joints, but lines are fast.
+            start_pos = (p1[0], p1[1])
+            end_pos = (p2[0], p2[1])
+            pygame.draw.line(screen, self.color, start_pos, end_pos, width)
+            pygame.draw.circle(screen, self.color, end_pos, width // 2)
+
+    def get_segments(self):
+        """Returns list of line segments ((x1,y1), (x2,y2)) currently active."""
+        segments = []
+        pts = list(self.points)
+        for i in range(len(pts) - 1):
+            segments.append(((pts[i][0], pts[i][1]), (pts[i+1][0], pts[i+1][1])))
+        return segments
+
+import os
+
+class Fruit(pygame.sprite.Sprite):
+    def __init__(self, x, y, width, height, fruit_type=None):
+        super().__init__()
+        
+        # Available types in assets
+        types = ["apple", "banana", "coconut", "orange", "pineapple", "watermelon"]
+        if fruit_type is None:
+            self.fruit_type = random.choice(types)
+        else:
+            self.fruit_type = fruit_type
+
+        # Load Image
+        # Try loading small version for performance if exists, else normal
+        try:
+            path = f"assets/fruits/{self.fruit_type}_small.png"
+            if not os.path.exists(path):
+                path = f"assets/fruits/{self.fruit_type}.png"
+            
+            raw_image = pygame.image.load(path).convert_alpha()
+            # If standard ones are huge (300KB+ pngs might be large), we might need scaling.
+            # Based on file sizes, _small are ~10KB, likely icons. Large are ~300KB.
+            
+            if "small" not in path:
+                # Scale down large images to decent game size
+                self.image = pygame.transform.scale(raw_image, (70, 70))
+            else:
+                self.image = raw_image
+                
+        except Exception as e:
+            # Fallback
+            # print(f"Error loading {self.fruit_type}: {e}")
+            self.radius = 35
+            self.color = random.choice([RED, ORANGE, GREEN])
+            self.image = pygame.Surface((self.radius*2, self.radius*2), pygame.SRCALPHA)
+            pygame.draw.circle(self.image, self.color, (self.radius, self.radius), self.radius)
+
+        self.rect = self.image.get_rect()
+        self.rect.center = (x, y)
+        self.radius = self.rect.width // 2 # Approx radius for collision
+        self.screen_h = height
+        
+        # Physics
+        self.pos_x = float(x)
+        self.pos_y = float(y)
+        self.vel_x = random.uniform(-1.5, 1.5) # Even slower horizontal
+        self.vel_y = random.uniform(-10, -7.5) # Tuned for low gravity
+        self.gravity = 0.08                    # 40% slower feel (Floaty)
+        
+    def update(self):
+        self.vel_y += self.gravity
+        self.pos_x += self.vel_x
+        self.pos_y += self.vel_y
+        
+        self.rect.centerx = int(self.pos_x)
+        self.rect.centery = int(self.pos_y)
+        
+        if self.rect.top > self.screen_h:
+            self.kill()
+            
+    def check_slice(self, segments):
+        """
+        Check collision against a list of blade segments.
+        Using swept-circle (capsule) collision.
+        """
+        center = (self.pos_x, self.pos_y)
+        for p1, p2 in segments:
+            # We treat the blade as having a thickness
+            # Let's say effective blade radius is 5px
+            if physics.check_capsule_circle_collision(p1, p2, 15, center, self.radius): # Increased blade radius for leniency
+                return True
+        return False
+
+class SlicedFruit(pygame.sprite.Sprite):
+    def __init__(self, x, y, fruit_type, half_id):
+        super().__init__()
+        # Try loading specific half
+        try:
+            # e.g. assets/fruits/apple_half_1_small.png
+            base = f"assets/fruits/{fruit_type}_half_{half_id}"
+            path_small = f"{base}_small.png"
+            path_large = f"{base}.png"
+            
+            path = path_small if os.path.exists(path_small) else path_large
+            
+            if os.path.exists(path):
+                 raw = pygame.image.load(path).convert_alpha()
+                 if "small" not in path:
+                     self.image = pygame.transform.scale(raw, (35, 70)) # generic half size
+                 else:
+                     self.image = raw
+            else:
+                 raise FileNotFoundError(f"Half image not found: {path}")
+        except Exception as e:
+            print(f"SlicedFruit load error for {fruit_type} half {half_id}: {e}")
+            # Fallback
+            self.image = pygame.Surface((35, 35), pygame.SRCALPHA)
+            pygame.draw.arc(self.image, GREEN, (0,0,35,35), 0, 3.14, 20)          
+        self.rect = self.image.get_rect()
+        self.rect.center = (x, y)
+        
+        # Physics to fly apart
+        self.pos_x = float(x)
+        self.pos_y = float(y)
+        self.gravity = 0.12 # Slow fall
+        
+        # Push apart based on ID
+        if half_id == 1:
+            self.vel_x = random.uniform(-4, -1)
+            self.angle_speed = 2
+        else:
+            self.vel_x = random.uniform(1, 4)
+            self.angle_speed = -2
+            
+        self.vel_y = random.uniform(-3, -1) # Little pop up
+        
+        # Rotation logic
+        self.original_image = self.image
+        self.angle = 0
+        self.alpha = 255 # For fading if we want (optional)
+
+    def update(self):
+        self.vel_y += self.gravity
+        self.pos_x += self.vel_x
+        self.pos_y += self.vel_y
+        
+        # Rotate
+        self.angle += self.angle_speed
+        self.image = pygame.transform.rotate(self.original_image, self.angle)
+        self.rect = self.image.get_rect(center=(self.pos_x, self.pos_y))
+        
+        if self.rect.top > 800: # Cleanup
+            self.kill()
+
+class Bomb(Fruit):
+    def __init__(self, x, y, width, height):
+        super().__init__(x, y, width, height, "bomb")
+        try:
+            path = "assets/fruits/bomb_small.png"
+            if not os.path.exists(path):
+                 path = "assets/fruits/bomb.png"
+            
+            self.image = pygame.image.load(path).convert_alpha()
+            if "small" not in path:
+                 self.image = pygame.transform.scale(self.image, (80, 80))
+            
+            self.radius = self.image.get_width() // 2
+        except Exception as e:
+            print(f"Bomb load error: {e}")
+            self.radius = 40
+            self.image = pygame.Surface((80, 80), pygame.SRCALPHA)
+            pygame.draw.circle(self.image, (50, 50, 50), (40, 40), 40)
+            pygame.draw.circle(self.image, RED, (40, 40), 10) # Fuse
+        
+        self.rect = self.image.get_rect()
+        self.rect.center = (x, y)
+        self.radius = self.rect.width // 2
+
+class Explosion(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        super().__init__()
+        try:
+            # Use specific explosion asset
+            path = "assets/vfx/explosion_small.png"
+            if not os.path.exists(path):
+                 path = "assets/vfx/explosion.png"
+            
+            self.image = pygame.image.load(path).convert_alpha()
+            self.image = pygame.transform.scale(self.image, (150, 150)) # big boom
+        except:
+            self.image = pygame.Surface((100, 100))
+            self.image.fill(RED)
+            
+        self.rect = self.image.get_rect()
+        self.rect.center = (x, y)
+        self.timer = 30 # frames (0.5 sec at 60fps)
+        self.original_image = self.image
+
+    def update(self):
+        self.timer -= 1
+        # Simple fade
+        alpha = int((self.timer / 30) * 255)
+        self.image.set_alpha(alpha)
+        
+        if self.timer <= 0:
+            self.kill()
+
+class SplashEffect(pygame.sprite.Sprite):
+    # Fruit to splash color mapping
+    FRUIT_SPLASH_MAP = {
+        "apple": "red",
+        "watermelon": "red",
+        "banana": "yellow",
+        "pineapple": "yellow",
+        "orange": "orange",
+        "coconut": "transparent"
+    }
+    
+    def __init__(self, x, y, fruit_type, velocity=0):
+        super().__init__()
+        
+        # Determine splash color
+        splash_color = self.FRUIT_SPLASH_MAP.get(fruit_type, "transparent")
+        
+        # Choose size variant based on velocity
+        # High velocity (fast slice) = bigger splash
+        if velocity > 400:
+            size_variant = ""  # Use large splash
+            scale_size = (180, 180)
+        else:
+            size_variant = "_small"
+            scale_size = (120, 120)
+        
+        # Load splash image
+        try:
+            path = f"assets/vfx/splash_{splash_color}{size_variant}.png"
+            if not os.path.exists(path):
+                # Fallback to small if large doesn't exist
+                path = f"assets/vfx/splash_{splash_color}_small.png"
+                scale_size = (120, 120)
+            
+            raw_image = pygame.image.load(path).convert_alpha()
+            self.image = pygame.transform.scale(raw_image, scale_size)
+            self.original_image = self.image.copy()
+            
+        except Exception as e:
+            # Fallback to colored circle
+            self.image = pygame.Surface((100, 100), pygame.SRCALPHA)
+            color_map = {
+                "red": (255, 50, 50),
+                "yellow": (255, 255, 50),
+                "orange": (255, 165, 0)
+            }
+            color = color_map.get(splash_color, (200, 200, 200))
+            pygame.draw.circle(self.image, (*color, 150), (50, 50), 50)
+            self.original_image = self.image.copy()
+        
+        self.rect = self.image.get_rect()
+        self.rect.center = (x, y)
+        
+        # Animation properties
+        self.lifetime = 20  # frames (~0.33 sec at 60fps)
+        self.age = 0
+        
+        # Slight random rotation for variety
+        angle = random.randint(-15, 15)
+        self.image = pygame.transform.rotate(self.original_image, angle)
+        self.rect = self.image.get_rect(center=(x, y))
+        
+    def update(self):
+        self.age += 1
+        
+        # Fade out
+        alpha = int(255 * (1 - self.age / self.lifetime))
+        if alpha < 0:
+            alpha = 0
+            
+        # Create faded version
+        self.image = self.original_image.copy()
+        self.image.set_alpha(alpha)
+        
+        if self.age >= self.lifetime:
+            self.kill()
+
+
+--- hand_tracker.py ---
+
+import cv2
+import mediapipe as mp
+import time
+
+import math
+
+class HandTracker:
+    def __init__(self, mode=False, max_hands=1, detection_con=0.5, track_con=0.5):
+        self.mode = mode
+        self.max_hands = max_hands
+        self.detection_con = detection_con
+        self.track_con = track_con
+
+        # Smoothing State
+        self.prev_x, self.prev_y = 0, 0
+        self.alpha = 0.5  # Smoothing factor (0 < alpha < 1). Lower = smoother but more lag.
+
+        self.mp_hands = mp.solutions.hands
+        self.hands = self.mp_hands.Hands(
+            static_image_mode=self.mode,
+            max_num_hands=self.max_hands,
+            model_complexity=0,  # Optimized for speed
+            min_detection_confidence=self.detection_con,
+            min_tracking_confidence=self.track_con
+        )
+        self.mp_draw = mp.solutions.drawing_utils
+
+    def find_hands(self, img, draw=True):
+        img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        self.results = self.hands.process(img_rgb)
+
+        if self.results.multi_hand_landmarks:
+            for hand_lms in self.results.multi_hand_landmarks:
+                if draw:
+                    self.mp_draw.draw_landmarks(img, hand_lms, self.mp_hands.HAND_CONNECTIONS)
+        return img
+
+    def find_position(self, img, hand_no=0):
+        lm_list = []
+        if self.results.multi_hand_landmarks:
+            if hand_no < len(self.results.multi_hand_landmarks):
+                my_hand = self.results.multi_hand_landmarks[hand_no]
+                for id, lm in enumerate(my_hand.landmark):
+                    h, w, c = img.shape
+                    cx, cy = int(lm.x * w), int(lm.y * h)
+                    lm_list.append([id, cx, cy])
+        return lm_list
+
+    def get_tracked_data(self, img):
+        """
+        Returns (x, y, velocity) for the index finger tip.
+        Applies EMA smoothing.
+        """
+        # Process the image first to get landmarks
+        self.find_hands(img, draw=False)
+        
+        lm_list = self.find_position(img)
+        if len(lm_list) != 0:
+            # Index finger tip is ID 8
+            raw_x, raw_y = lm_list[8][1], lm_list[8][2]
+            
+            # EMA Smoothing
+            # If this is the first frame (prev 0,0), jump straight to it to avoid flying in from corner
+            if self.prev_x == 0 and self.prev_y == 0:
+                self.prev_x, self.prev_y = raw_x, raw_y
+            
+            curr_x = self.alpha * raw_x + (1 - self.alpha) * self.prev_x
+            curr_y = self.alpha * raw_y + (1 - self.alpha) * self.prev_y
+            
+            # Velocity Calculation ( Euclidean distance per frame )
+            velocity = math.hypot(curr_x - self.prev_x, curr_y - self.prev_y)
+            
+            self.prev_x, self.prev_y = curr_x, curr_y
+            
+            return int(curr_x), int(curr_y), velocity
+        return None, None, 0
+
+
+--- input_manager.py ---
+
+import pygame
+import cv2
+import math
+import time
+from sensors import HandTracker, WebcamStream # Re-using existing robust sensors logic
+
+class InputProvider:
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+        
+    def get_input(self):
+        """
+        Returns (x, y, velocity, is_paused)
+        x, y: Screen coordinates (or None)
+        velocity: Pixels per second
+        is_paused: Boolean (e.g. open palm)
+        """
+        return None, None, 0, False
+        
+    def cleanup(self):
+        pass
+
+class MouseInput(InputProvider):
+    def __init__(self, width, height):
+        super().__init__(width, height)
+        self.prev_pos = None
+        self.prev_time = time.time()
+        
+    def get_input(self):
+        cur_time = time.time()
+        dt = cur_time - self.prev_time
+        if dt == 0: dt = 0.001
+        
+        mx, my = pygame.mouse.get_pos()
+        buttons = pygame.mouse.get_pressed()
+        
+        # Only track "blade" if left click is held
+        if not buttons[0]:
+            self.prev_pos = None
+            return None, None, 0, False
+            
+        velocity = 0
+        if self.prev_pos:
+            dist = math.hypot(mx - self.prev_pos[0], my - self.prev_pos[1])
+            velocity = dist / dt
+            
+        self.prev_pos = (mx, my)
+        self.prev_time = cur_time
+        return mx, my, velocity, False # Mouse can't really "pause" with gesture
+
+class HandInput(InputProvider):
+    def __init__(self, width, height):
+        super().__init__(width, height)
+        # Initialize Webcam and Tracker
+        # We reuse the logic from sensors.py which is already threaded and optimized
+        self.webcam = WebcamStream(src=0, width=width, height=height).start()
+        self.tracker = HandTracker(detection_con=0.6, track_con=0.6)
+        
+        # We need to map camera coords to screen
+        self.cam_w = width
+        self.cam_h = height
+        
+    def get_input(self):
+        frame = self.webcam.read()
+        if frame is None:
+            return None, None, 0, False
+            
+        # Flip for mirror effect
+        frame = cv2.flip(frame, 1)
+        
+        # Tracker returns raw frame coords (assuming sensors.py returns pixels)
+        # sensors.py find_position signature: (frame) -> cx, cy, velocity, is_palm_open
+        tx, ty, velocity, is_palm_open = self.tracker.find_position(frame)
+        
+        # If sensors.py returns None, tx is None
+        if tx is None:
+            return None, None, 0, False
+            
+        # Map logic:
+        # sensors.py already returns pixel coordinates relative to the frame passed in.
+        # Since we flipped the frame, and passed it to find_position, the x,y are correct for the flipped frame.
+        # We just need to scale if window size differs from camera size
+        # Assuming 1:1 for now if we init webcam with window size
+        
+        sx = int((tx / self.cam_w) * self.width)
+        sy = int((ty / self.cam_h) * self.height)
+        
+        return sx, sy, velocity, is_palm_open
+        
+    def get_frame(self):
+        """Optional: Return frame for drawing background"""
+        frame = self.webcam.frame # Access last frame directly or via read()
+        if frame is not None:
+             frame = cv2.flip(frame, 1)
+        return frame
+
+    def cleanup(self):
+        self.webcam.stop()
+
+
+--- main.py ---
+
+import pygame
+import sys
+import random
+import cv2
+import numpy as np
+
+# Modules
+from audio_manager import AudioManager
+from input_manager import MouseInput, HandInput
+from ui_manager import SceneManager
+from game_engine import ClassicMode, SurvivalMode
+from game_objects import Blade, Fruit, Bomb, SlicedFruit, Explosion, SplashEffect
+
+# Colors
+WHITE = (255, 255, 255)
+
+# Config
+WIDTH, HEIGHT = 800, 600 # Keeping larger window for menu usability
+FPS = 60
+MIN_CUT_VELOCITY = 150 # Rescaled 
+
+def main():
+    pygame.init()
+    screen = pygame.display.set_mode((WIDTH, HEIGHT))
+    pygame.display.set_caption("Fruit Ninja Final")
+    clock = pygame.time.Clock()
+    
+    # Systems
+    audio = AudioManager()
+    ui = SceneManager(WIDTH, HEIGHT)
+    
+    # Load Background
+    try:
+        bg_raw = pygame.image.load("assets/background/game_background.jpg").convert()
+        bg_img = pygame.transform.scale(bg_raw, (WIDTH, HEIGHT))
+        # Darken it
+        dark = pygame.Surface((WIDTH, HEIGHT))
+        dark.set_alpha(80) # 30% dark
+        dark.fill((0, 0, 0))
+        bg_img.blit(dark, (0,0))
+    except Exception as e:
+        print(f"Background load error: {e}")
+        bg_img = pygame.Surface((WIDTH, HEIGHT))
+        bg_img.fill((50, 50, 50))
+
+    # Game State Variables
+    input_provider = None
+    game_mode = None
+    blade = Blade()
+    
+    all_sprites = pygame.sprite.Group()
+    fruits = pygame.sprite.Group() # Only active fruits (not slices or bombs)
+    
+    # VFX State
+    shake_timer = 0
+    
+    # Start Music
+    audio.play_music("menu")
+    
+    running = True
+    while running:
+        mx, my = pygame.mouse.get_pos()
+        click = False
+        
+        # Shake Logic
+        shake_x, shake_y = 0, 0
+        if shake_timer > 0:
+            shake_timer -= 1
+            shake_x = random.randint(-5, 5)
+            shake_y = random.randint(-5, 5)
+
+        # Event Loop
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    click = True
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE and ui.current_scene == "GAME":
+                    ui.is_paused = not ui.is_paused
+                    
+        # --- SCENE LOGIC ---
+        
+        if ui.current_scene == "MENU":
+            screen.blit(bg_img, (0,0))
+            action = ui.handle_input("MENU", mx, my, click)
+            ui.draw_menu(screen)
+            if action == "GOTO_MODE":
+                ui.push_scene("MODE_SEL")
+                audio.play_sfx("start")
+
+        elif ui.current_scene == "MODE_SEL":
+            screen.blit(bg_img, (0,0))
+            action = ui.handle_input("MODE_SEL", mx, my, click)
+            ui.draw_mode_select(screen)
+            
+            if action == "MODE_CLASSIC":
+                game_mode = ClassicMode()
+                ui.push_scene("INPUT_SEL")
+                audio.play_sfx("start")
+            elif action == "MODE_SURVIVAL":
+                game_mode = SurvivalMode()
+                ui.push_scene("INPUT_SEL")
+                audio.play_sfx("start")
+            elif action == "BACK":
+                ui.pop_scene()
+                audio.play_sfx("start")
+                
+        elif ui.current_scene == "INPUT_SEL":
+            screen.blit(bg_img, (0,0))
+            action = ui.handle_input("INPUT_SEL", mx, my, click)
+            ui.draw_input_select(screen)
+            
+            if action:
+                if action == "INPUT_MOUSE":
+                    input_provider = MouseInput(WIDTH, HEIGHT)
+                    ui.push_scene("GAME")
+                    audio.play_music("game_slow")
+                    all_sprites.empty()
+                    fruits.empty()
+                    blade = Blade()
+                elif action == "INPUT_HAND":
+                    input_provider = HandInput(WIDTH, HEIGHT)
+                    ui.push_scene("GAME")
+                    audio.play_music("game_slow")
+                    all_sprites.empty()
+                    fruits.empty()
+                    blade = Blade()
+                elif action == "BACK":
+                    ui.pop_scene()
+                    audio.play_sfx("start")
+
+        elif ui.current_scene == "GAME":
+            # Check if paused
+            if ui.is_paused:
+                # Draw game state frozen
+                if hasattr(input_provider, 'get_frame'):
+                    frame = input_provider.get_frame()
+                    if frame is not None:
+                        img_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                        img_rgb = np.rot90(img_rgb)
+                        surf = pygame.surfarray.make_surface(img_rgb)
+                        surf = pygame.transform.flip(surf, True, False)
+                        screen.blit(pygame.transform.scale(surf, (WIDTH, HEIGHT)), (0,0))
+                        screen.blit(bg_img, (0,0), special_flags=pygame.BLEND_MULT)
+                    else:
+                        screen.blit(bg_img, (0,0))
+                else:
+                    screen.blit(bg_img, (shake_x, shake_y))
+                
+                all_sprites.draw(screen)
+                blade.draw(screen)
+                
+                # HUD
+                hud = ui.font_small.render(game_mode.get_status(), True, WHITE)
+                screen.blit(hud, (20, 20))
+                
+                # Pause menu (mouse-only input)
+                action = ui.handle_input("PAUSE", mx, my, click)
+                ui.draw_pause(screen)
+                
+                if action == "RESUME":
+                    ui.is_paused = False
+                    audio.play_sfx("start")
+                elif action == "BACK":
+                    ui.is_paused = False
+                    if input_provider:
+                        input_provider.cleanup()
+                        input_provider = None
+                    ui.pop_scene()
+                    audio.play_music("menu")
+            else:
+                # Normal gameplay
+                ix, iy, velocity, input_paused = input_provider.get_input()
+                
+                # Draw Background
+                if hasattr(input_provider, 'get_frame'):
+                    frame = input_provider.get_frame()
+                    if frame is not None:
+                        img_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                        img_rgb = np.rot90(img_rgb)
+                        surf = pygame.surfarray.make_surface(img_rgb)
+                        surf = pygame.transform.flip(surf, True, False)
+                        screen.blit(pygame.transform.scale(surf, (WIDTH, HEIGHT)), (0,0))
+                        screen.blit(bg_img, (0,0), special_flags=pygame.BLEND_MULT)
+                    else:
+                        screen.blit(bg_img, (0,0))
+                else:
+                    screen.blit(bg_img, (shake_x, shake_y))
+                
+                # Update Logic (only if not palm-paused)
+                if not input_paused:
+                    if ix is not None:
+                        blade.update(ix, iy)
+                    
+                    # Spawner
+                    if random.randint(1, 40) == 1:
+                        spawn_x = random.randint(100, WIDTH-100)
+                        spawn_y = HEIGHT + 20
+                        
+                        if random.randint(1, 5) == 1:
+                            b = Bomb(spawn_x, spawn_y, WIDTH, HEIGHT)
+                            all_sprites.add(b)
+                            fruits.add(b)
+                        else:
+                            f = Fruit(spawn_x, spawn_y, WIDTH, HEIGHT)
+                            all_sprites.add(f)
+                            fruits.add(f)
+                    
+                    all_sprites.update()
+                    
+                    # Collisions
+                    segments = blade.get_segments()
+                    if velocity > MIN_CUT_VELOCITY and segments:
+                        hit_count = 0
+                        for entity in list(fruits):
+                            if entity.check_slice(segments):
+                                hit_count += 1
+                                
+                                if isinstance(entity, Bomb):
+                                    audio.play_sfx("bomb")
+                                    boom = Explosion(entity.pos_x, entity.pos_y)
+                                    all_sprites.add(boom)
+                                    entity.kill()
+                                    game_mode.on_bomb()
+                                    shake_timer = 20
+                                else:
+                                    audio.play_sfx("splat")
+                                    pts = game_mode.on_slice(entity)
+                                    
+                                    splash = SplashEffect(entity.pos_x, entity.pos_y, entity.fruit_type, velocity)
+                                    all_sprites.add(splash)
+                                    
+                                    h1 = SlicedFruit(entity.pos_x, entity.pos_y, entity.fruit_type, 1)
+                                    h2 = SlicedFruit(entity.pos_x, entity.pos_y, entity.fruit_type, 2)
+                                    all_sprites.add(h1)
+                                    all_sprites.add(h2)
+                                    entity.kill()
+                        
+                        if hit_count > 1:
+                            audio.play_sfx("combo")
+
+                    # Check dropped fruits
+                    for entity in list(fruits):
+                        if entity.rect.top > HEIGHT:
+                            if not isinstance(entity, Bomb):
+                                game_mode.on_miss()
+                                entity.kill()
+                            else:
+                                entity.kill()
+
+                    # Check Game Over
+                    if game_mode.game_over:
+                        ui.current_scene = "OVER"
+                        audio.play_sfx("over")
+                        audio.stop_music()
+                
+                # Draw Game
+                all_sprites.draw(screen)
+                blade.draw(screen)
+                
+                # Palm pause indicator
+                if input_paused:
+                    txt = ui.font_big.render("PALM PAUSE", True, (255, 255, 0))
+                    screen.blit(txt, (WIDTH//2 - txt.get_width()//2, HEIGHT//2))
+                
+                # HUD
+                hud = ui.font_small.render(game_mode.get_status(), True, WHITE)
+                screen.blit(hud, (20, 20))
+                
+                # Pause hint
+                hint = ui.font_small.render("ESC to Pause", True, (150, 150, 150))
+                screen.blit(hint, (WIDTH - hint.get_width() - 20, 20))
+
+        elif ui.current_scene == "OVER":
+            # Keep drawing game in background
+            all_sprites.draw(screen)
+            action = ui.handle_input("OVER", mx, my, click)
+            ui.draw_game_over(screen, game_mode.score)
+            
+            if action == "GOTO_MENU":
+                if input_provider:
+                    input_provider.cleanup()
+                    input_provider = None
+                ui.current_scene = "MENU"
+                ui.scene_stack.clear()
+                audio.play_music("menu")
+            elif action == "RESTART":
+                ui.current_scene = "GAME"
+                audio.play_music("game_slow")
+                
+                if isinstance(game_mode, ClassicMode):
+                    game_mode = ClassicMode()
+                else:
+                    game_mode = SurvivalMode()
+                    
+                all_sprites.empty()
+                fruits.empty()
+                blade = Blade()
+
+        pygame.display.flip()
+        clock.tick(FPS)
+        
+    
+    # Cleanup logic
+    if input_provider:
+        input_provider.cleanup()
+
+    pygame.quit()
+    sys.exit()
+
+if __name__ == "__main__":
+    main()
+
+
+--- physics.py ---
+
+import math
+
+def point_line_segment_distance_sq(px, py, x1, y1, x2, y2):
+    """
+    Calculates the squared distance from point (px, py) to the line segment (x1,y1)-(x2,y2).
+    Squared distance is returned to avoid expensive sqrt calculations when not needed.
+    """
+    dx = x2 - x1
+    dy = y2 - y1
+    
+    if dx == 0 and dy == 0:
+        return (px - x1)**2 + (py - y1)**2
+
+    # Project point onto line (parameter t)
+    t = ((px - x1) * dx + (py - y1) * dy) / (dx*dx + dy*dy)
+
+    # Clamp t to segment [0, 1]
+    t = max(0, min(1, t))
+
+    # Closest point on segment
+    closest_x = x1 + t * dx
+    closest_y = y1 + t * dy
+
+    return (px - closest_x)**2 + (py - closest_y)**2
+
+def check_capsule_circle_collision(p1, p2, thickness, center, radius):
+    """
+    Checks if a capsule (line segment p1-p2 with thickness) intersects a circle.
+    
+    p1, p2: (x, y) tuples
+    center: (x, y) tuple
+    thickness: float (radius of the capsule end)
+    radius: float (radius of the circle)
+    """
+    dist_sq = point_line_segment_distance_sq(center[0], center[1], p1[0], p1[1], p2[0], p2[1])
+    
+    # Collision if distance < (capsule_radius + circle_radius)
+    # Note: 'thickness' in this context is usually the total width? 
+    # Let's assume input 'thickness' is the total width, so radius is thickness/2.
+    # However, usually for a blade, we treat thickness as the radius of the "swept" circle.
+    # Let's say thickness is the "reach".
+    
+    threshold = (thickness + radius) ** 2
+    return dist_sq <= threshold
+
+
+--- requirements.txt ---
+
+opencv-python
+mediapipe
+pygame
+numpy
+
+
+--- sensors.py ---
+
+import cv2
+import mediapipe as mp
+import time
+import math
+from threading import Thread
+
+class WebcamStream:
+    """
+    Threaded webcam capture to ensure the main loop never blocks on I/O.
+    Always holds the most recent frame.
+    """
+    def __init__(self, src=0, width=640, height=480):
+        # cv2.CAP_DSHOW is required on Windows to avoid MSMF errors and reduce initialization latency
+        self.stream = cv2.VideoCapture(src, cv2.CAP_DSHOW)
+        self.stream.set(cv2.CAP_PROP_FRAME_WIDTH, width)
+        self.stream.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
+        
+        # Read first frame to ensure it's working
+        (self.grabbed, self.frame) = self.stream.read()
+        self.stopped = False
+
+    def start(self):
+        Thread(target=self.update, args=()).start()
+        return self
+
+    def update(self):
+        while True:
+            if self.stopped:
+                return
+            (self.grabbed, self.frame) = self.stream.read()
+
+    def read(self):
+        return self.frame
+
+    def stop(self):
+        self.stopped = True
+        self.stream.release()
+
+class HandTracker:
+    def __init__(self, detection_con=0.6, track_con=0.6):
+        self.mp_hands = mp.solutions.hands
+        self.hands = self.mp_hands.Hands(
+            static_image_mode=False,
+            max_num_hands=1,         # Only track one hand for performance
+            model_complexity=0,      # Fastest model
+            min_detection_confidence=detection_con,
+            min_tracking_confidence=track_con
+        )
+        
+        # Tracking State
+        self.prev_x, self.prev_y = 0, 0
+        self.prev_time = time.time()
+        
+        # Adaptive Smoothing params
+        self.alpha = 0.5 
+        
+    def is_palm_open(self, lm_list):
+        """
+        Heuristic to check if hand is open.
+        Checks if tips of fingers (8, 12, 16, 20) are far from wrist (0)
+        and spread out.
+        """
+        if not lm_list:
+            return False
+            
+        # 1. Check if all fingers are extended (tipy < pipy usually for upright hand, 
+        # but rotation matters. Better: Dist(Tip, Wrist) > Dist(Pip, Wrist))
+        # Simple heuristic: Check distance of tips from wrist
+        wrist = lm_list[0]
+        tips = [8, 12, 16, 20]
+        pips = [6, 10, 14, 18]
+        
+        open_fingers = 0
+        for i in range(4):
+            tip = lm_list[tips[i]]
+            pip = lm_list[pips[i]]
+            
+            # Simple check: Tip is further from wrist than PIP
+            dist_tip = math.hypot(tip[1]-wrist[1], tip[2]-wrist[2])
+            dist_pip = math.hypot(pip[1]-wrist[1], pip[2]-wrist[2])
+            
+            if dist_tip > dist_pip:
+                open_fingers += 1
+                
+        return open_fingers == 4 # Thumb is tricky, ignoring for "Palm"
+
+    def find_position(self, frame):
+        """
+        Processes frame and returns:
+        cx, cy, velocity, is_palm_open
+        """
+        # Optimization: Pass by reference
+        img_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        img_rgb.flags.writeable = False
+        
+        results = self.hands.process(img_rgb)
+        
+        timestamp = time.time()
+        dt = timestamp - self.prev_time
+        if dt == 0: dt = 0.001
+        
+        lm_list_formatted = []
+        is_open = False
+        
+        cx, cy, velocity = None, None, 0.0
+        
+        if results.multi_hand_landmarks:
+            hand_lms = results.multi_hand_landmarks[0]
+            h, w, c = frame.shape
+            
+            # Extract all landmarks for gesture logic
+            for id, lm in enumerate(hand_lms.landmark):
+                lm_list_formatted.append([id, lm.x, lm.y]) # storing normalized for logic or pixels?
+                # logic above uses pixels or relative? Let's use pixels for consistency with drawing?
+                # Logic above used hypot on x,y. Let's convert all to pixels for the helper.
+            
+            # Re-convert to list of [id, x, y] (pixels)
+            pixel_lms = []
+            for lm in hand_lms.landmark:
+                pixel_lms.append([0, int(lm.x*w), int(lm.y*h)]) # ID not needed in index, just position
+            
+            # Index Finger Tip is ID 8
+            raw_x, raw_y = pixel_lms[8][1], pixel_lms[8][2]
+            
+            # Check Gesture
+            is_open = self.is_palm_open(pixel_lms)
+            
+            # --- Adaptive Smoothing (Copy from before) ---
+            dist = math.hypot(raw_x - self.prev_x, raw_y - self.prev_y)
+            if dist > 30: target_alpha = 0.8 
+            else: target_alpha = 0.2
+            
+            self.alpha = target_alpha
+            
+            if self.prev_x == 0 and self.prev_y == 0:
+                smooth_x, smooth_y = raw_x, raw_y
+            else:
+                smooth_x = self.alpha * raw_x + (1 - self.alpha) * self.prev_x
+                smooth_y = self.alpha * raw_y + (1 - self.alpha) * self.prev_y
+            
+            move_dist = math.hypot(smooth_x - self.prev_x, smooth_y - self.prev_y)
+            velocity = move_dist / dt 
+            
+            self.prev_x, self.prev_y = smooth_x, smooth_y
+            
+            cx, cy = int(smooth_x), int(smooth_y)
+            
+        self.prev_time = timestamp
+        return cx, cy, velocity, is_open
+
+
+--- ui_manager.py ---
+
+import pygame
+import os
+
+# Colors
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+ORANGE = (255, 165, 0)
+RED = (200, 50, 50)
+GREEN = (50, 200, 50)
+CYAN = (0, 255, 255)
+
+class FrameButton:
+    """Transparent button with rounded corners and white border"""
+    def __init__(self, x, y, w, h, text, action_code, use_image=None):
+        self.rect = pygame.Rect(x, y, w, h)
+        self.text = text
+        self.action = action_code
+        self.hover = False
+        self.scale = 1.0
+        self.target_scale = 1.0
+        self.image = None
+        
+        # Load image if specified
+        if use_image:
+            try:
+                path = f"assets/ui/buttons/{use_image}"
+                if os.path.exists(path):
+                    raw = pygame.image.load(path).convert_alpha()
+                    self.image = pygame.transform.scale(raw, (w, h))
+            except Exception as e:
+                print(f"Button image load error: {e}")
+        
+    def draw(self, screen, font):
+        # Smooth scale animation
+        self.scale += (self.target_scale - self.scale) * 0.3
+        
+        # Calculate scaled rect
+        scaled_w = int(self.rect.w * self.scale)
+        scaled_h = int(self.rect.h * self.scale)
+        scaled_rect = pygame.Rect(
+            self.rect.centerx - scaled_w // 2,
+            self.rect.centery - scaled_h // 2,
+            scaled_w,
+            scaled_h
+        )
+        
+        if self.image:
+            # Use image asset
+            if self.scale != 1.0:
+                scaled_img = pygame.transform.scale(self.image, (scaled_w, scaled_h))
+                screen.blit(scaled_img, scaled_rect)
+            else:
+                screen.blit(self.image, scaled_rect)
+        else:
+            # Transparent button with white border and rounded corners
+            if self.hover:
+                # Subtle glow
+                glow_surf = pygame.Surface((scaled_w + 10, scaled_h + 10), pygame.SRCALPHA)
+                pygame.draw.rect(glow_surf, (*WHITE, 30), glow_surf.get_rect(), border_radius=10)
+                screen.blit(glow_surf, (scaled_rect.x - 5, scaled_rect.y - 5))
+            
+            # Draw border only (transparent background)
+            pygame.draw.rect(screen, WHITE, scaled_rect, 2, border_radius=10)
+            
+            # Text
+            txt_surf = font.render(self.text, True, WHITE)
+            text_rect = txt_surf.get_rect(center=scaled_rect.center)
+            screen.blit(txt_surf, text_rect)
+    
+    def check_hover(self, mx, my):
+        self.hover = self.rect.collidepoint(mx, my)
+        self.target_scale = 1.05 if self.hover else 1.0
+        return self.hover
+    
+    def check_click(self, mx, my, click):
+        if self.rect.collidepoint(mx, my) and click:
+            self.target_scale = 0.95  # Click feedback
+            return self.action
+        return None
+
+class SceneManager:
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+        self.current_scene = "MENU"
+        self.scene_stack = []  # For navigation
+        self.is_paused = False
+        
+        self.font_big = pygame.font.Font(None, 80)
+        self.font_med = pygame.font.Font(None, 50)
+        self.font_small = pygame.font.Font(None, 30)
+        
+        cx = width // 2
+        cy = height // 2
+        
+        # Menu - Use existing PLAY button asset
+        self.btn_play = FrameButton(cx - 100, cy + 50, 200, 80, "PLAY", "GOTO_MODE", use_image="btn_play.png")
+        
+        # Mode Select - Transparent with white borders
+        self.btn_classic = FrameButton(cx - 220, cy + 20, 200, 60, "CLASSIC", "MODE_CLASSIC")
+        self.btn_survival = FrameButton(cx + 20, cy + 20, 200, 60, "SURVIVAL", "MODE_SURVIVAL")
+        self.btn_back_mode = FrameButton(cx - 100, cy + 120, 200, 50, "BACK", "BACK")
+        
+        # Input Select - Transparent with white borders
+        self.btn_mouse = FrameButton(cx - 220, cy + 20, 200, 60, "MOUSE", "INPUT_MOUSE")
+        self.btn_hand = FrameButton(cx + 20, cy + 20, 200, 60, "CAMERA", "INPUT_HAND")
+        self.btn_back_input = FrameButton(cx - 100, cy + 120, 200, 50, "BACK", "BACK")
+        
+        # Pause menu (frame style)
+        self.btn_resume = FrameButton(cx - 100, cy - 40, 200, 60, "RESUME", "RESUME")
+        self.btn_back_pause = FrameButton(cx - 100, cy + 40, 200, 60, "BACK", "BACK")
+        
+        # Game Over (frame style)
+        self.btn_replay = FrameButton(cx - 220, cy + 100, 200, 60, "REPLAY", "RESTART")
+        self.btn_home = FrameButton(cx + 20, cy + 100, 200, 60, "HOME", "GOTO_MENU")
+    
+    def push_scene(self, scene):
+        """Push current scene to stack before changing"""
+        if self.current_scene not in self.scene_stack:
+            self.scene_stack.append(self.current_scene)
+        self.current_scene = scene
+    
+    def pop_scene(self):
+        """Go back to previous scene"""
+        if self.scene_stack:
+            self.current_scene = self.scene_stack.pop()
+            return True
+        return False
+
+    def draw_menu(self, screen):
+        # Title
+        title = self.font_big.render("FRUIT NINJA V3", True, ORANGE)
+        screen.blit(title, (self.width//2 - title.get_width()//2, 100))
+        
+        sub = self.font_small.render("Slice fruits with hand or mouse!", True, WHITE)
+        screen.blit(sub, (self.width//2 - sub.get_width()//2, 180))
+        
+        # Button drawn last (on top)
+        self.btn_play.draw(screen, self.font_med)
+
+    def draw_mode_select(self, screen):
+        # Title first
+        title = self.font_med.render("SELECT MODE", True, WHITE)
+        screen.blit(title, (self.width//2 - title.get_width()//2, 100))
+        
+        # Buttons drawn last (on top of everything)
+        self.btn_classic.draw(screen, self.font_med)
+        self.btn_survival.draw(screen, self.font_med)
+        self.btn_back_mode.draw(screen, self.font_small)
+
+    def draw_input_select(self, screen):
+        # Title first
+        title = self.font_med.render("SELECT CONTROL", True, WHITE)
+        screen.blit(title, (self.width//2 - title.get_width()//2, 100))
+        
+        # Buttons drawn last (on top)
+        self.btn_mouse.draw(screen, self.font_med)
+        self.btn_hand.draw(screen, self.font_med)
+        self.btn_back_input.draw(screen, self.font_small)
+
+    
+    def draw_pause(self, screen):
+        # Dark overlay
+        overlay = pygame.Surface((self.width, self.height))
+        overlay.set_alpha(200)
+        overlay.fill(BLACK)
+        screen.blit(overlay, (0, 0))
+        
+        title = self.font_big.render("PAUSED", True, ORANGE)
+        screen.blit(title, (self.width//2 - title.get_width()//2, 150))
+        
+        self.btn_resume.draw(screen, self.font_med)
+        self.btn_back_pause.draw(screen, self.font_med)
+    
+    def draw_game_over(self, screen, score):
+        # Dark overlay
+        overlay = pygame.Surface((self.width, self.height))
+        overlay.set_alpha(200)
+        overlay.fill(BLACK)
+        screen.blit(overlay, (0, 0))
+        
+        title = self.font_big.render("GAME OVER", True, RED)
+        screen.blit(title, (self.width//2 - title.get_width()//2, 150))
+        
+        score_text = self.font_med.render(f"Score: {score}", True, WHITE)
+        screen.blit(score_text, (self.width//2 - score_text.get_width()//2, 250))
+        
+        self.btn_replay.draw(screen, self.font_med)
+        self.btn_home.draw(screen, self.font_med)
+
+    def handle_input(self, scene, mx, my, click):
+        if scene == "MENU":
+            self.btn_play.check_hover(mx, my)
+            return self.btn_play.check_click(mx, my, click)
+        
+        elif scene == "MODE_SEL":
+            self.btn_classic.check_hover(mx, my)
+            self.btn_survival.check_hover(mx, my)
+            self.btn_back_mode.check_hover(mx, my)
+            
+            a1 = self.btn_classic.check_click(mx, my, click)
+            a2 = self.btn_survival.check_click(mx, my, click)
+            a3 = self.btn_back_mode.check_click(mx, my, click)
+            return a1 or a2 or a3
+        
+        elif scene == "INPUT_SEL":
+            self.btn_mouse.check_hover(mx, my)
+            self.btn_hand.check_hover(mx, my)
+            self.btn_back_input.check_hover(mx, my)
+            
+            a1 = self.btn_mouse.check_click(mx, my, click)
+            a2 = self.btn_hand.check_click(mx, my, click)
+            a3 = self.btn_back_input.check_click(mx, my, click)
+            return a1 or a2 or a3
+        
+        elif scene == "PAUSE":
+            self.btn_resume.check_hover(mx, my)
+            self.btn_back_pause.check_hover(mx, my)
+            
+            a1 = self.btn_resume.check_click(mx, my, click)
+            a2 = self.btn_back_pause.check_click(mx, my, click)
+            return a1 or a2
+        
+        elif scene == "OVER":
+            self.btn_replay.check_hover(mx, my)
+            self.btn_home.check_hover(mx, my)
+            
+            a1 = self.btn_replay.check_click(mx, my, click)
+            a2 = self.btn_home.check_click(mx, my, click)
+            return a1 or a2
+        
+        return None
