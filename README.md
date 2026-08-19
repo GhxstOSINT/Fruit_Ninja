@@ -1,54 +1,83 @@
-# Fruit Ninja - AI Hand Controlled
+# 🍉 Fruit Ninja — AI Hand Controlled
 
-A high-performance computer vision game where you play Fruit Ninja using your real hand as the blade! Built with Python, OpenCV, MediaPipe, and Pygame.
+**A computer-vision take on Fruit Ninja: your real hand is the blade.**
 
-## Features
+Built with Python, OpenCV, MediaPipe, and Pygame, this version replaces the
+touchscreen swipe with real-time hand tracking — your index finger slices
+fruit through the air, physics carries the pieces, and an open palm doubles
+as a safety pause so you can reposition without risking a bomb.
 
-*   **Real-Time Hand Tracking**: Uses MediaPipe to track your index finger with low latency.
-*   **Physics-Based Gaming**: Fruits launch and fall with gravity; blade collision uses robust line-segment detection for fast swipes.
-*   **Visual Adjustments**: 
-    *   **Blade Trail**: Dynamic cyan trail that follows your finger.
-    *   **Slicing Effects**: Fruits split into two halves when sliced.
-    *   **Assets**: Uses real fruit graphics (Apple, Banana, Watermelon, etc.).
-*   **Gameplay Mechanics**:
-    *   **Bombs**: Avoid slicing the dark bombs with red fuses! (-5 points).
-    *   **Palm Pause**: Show an **Open Palm** to the camera to Pause/Shield the blade (safety mechanism).
-    *   **Score System**: Track your slicing performance.
+---
 
-## Prerequisites
+## ✨ Features
 
-*   Python 3.7+
-*   Webcam
+- **Real-time hand tracking** — MediaPipe tracks your index finger with low
+  latency to drive the blade.
+- **Physics-based gameplay** — fruits launch upward and fall under gravity;
+  blade collisions use robust line-segment detection so fast swipes still
+  register correctly.
+- **Visual polish**
+  - Dynamic cyan blade trail that follows your finger.
+  - Fruits split into two halves on a successful slice.
+  - Real fruit artwork (apple, banana, watermelon, and more).
+- **Gameplay mechanics**
+  - 💣 **Bombs** — dark bombs with red fuses cost **−5 points** if sliced.
+    Avoid them.
+  - ✋ **Palm pause** — show an open palm to the camera to pause/shield the
+    blade, a safety mechanism for repositioning your hand near a bomb.
+  - Ongoing score tracking as you play.
 
-## Installation
+---
 
-1.  Clone the repository (or download files).
-2.  Install dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
+## 🧰 Prerequisites
 
-## How to Play
+- Python 3.7+
+- A webcam
 
-1.  Run the game:
-    ```bash
-    python main.py
-    ```
-2.  **Controls**:
-    *   **Slice**: Move your index finger across the screen to slice fruits. You must move fast enough to create a "cut".
-    *   **Pause**: Open your hand (extend all 5 fingers) to pause the blade. This is useful if a bomb is in the way and you want to move your hand safely.
-    *   **Quit**: Close the window or press `Alt+F4`.
+---
 
-## Troubleshooting
+## 📦 Installation
 
-*   **Lag?** ensure you have good lighting for the camera.
-*   **Camera Error?** The code uses `cv2.CAP_DSHOW` for Windows compatibility. If on Linux/Mac, you might need to remove that flag in `sensors.py`.
+1. Clone the repository (or download the files).
+2. Install dependencies:
 
-## Credits
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+---
+
+## 🕹️ How to Play
+
+Run the game:
+
+```bash
+python main.py
+```
+
+### Controls
+
+| Action | How |
+|---|---|
+| **Slice** | Move your index finger across the screen fast enough to register a cut |
+| **Pause / shield** | Open your hand (extend all five fingers) to pause the blade |
+| **Quit** | Close the window, or `Alt+F4` |
+
+---
+
+## 🛠️ Troubleshooting
+
+- **Laggy tracking?** Make sure you're in good, even lighting — MediaPipe's
+  hand detection is noticeably less reliable in dim or backlit rooms.
+- **Camera won't open?** The code uses `cv2.CAP_DSHOW` for Windows camera
+  compatibility. On Linux or macOS, remove that flag in `sensors.py`.
+
+---
+
+## 🙌 Credits
 
 Built with:
-*   [MediaPipe](https://developers.google.com/mediapipe)
-*   [Pygame](https://www.pygame.org/)
-*   [OpenCV](https://opencv.org/)
 
-# Fruit_Ninja
+- [MediaPipe](https://developers.google.com/mediapipe)
+- [Pygame](https://www.pygame.org/)
+- [OpenCV](https://opencv.org/)
